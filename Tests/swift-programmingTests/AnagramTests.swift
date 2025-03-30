@@ -27,7 +27,7 @@ final class AnagramTests: XCTestCase {
     let nonAnagramPairs: [(String, String)] = [
         ("hello", "world"),
         ("swift", "swim"),
-        ("apple", "papel"),
+        ("apple", "maple"),
         ("moon", "soon"),
         ("train", "brain")
     ]
