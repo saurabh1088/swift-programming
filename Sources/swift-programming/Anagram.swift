@@ -77,4 +77,49 @@ struct Anagram {
         }
         return sortedString1 == sortedString2
     }
+    
+    /// Checks if two given strings are anagrams of each other, ignoring case and whitespace.
+    ///
+    /// An anagram is a word or phrase formed by rearranging the letters of another.
+    /// This method normalizes both input strings by converting them to lowercase, removing spaces,
+    /// and sorting their characters to determine if they contain the same characters in the same frequency.
+    ///
+    /// - Parameters:
+    ///   - string1: The first string to compare.
+    ///   - string2: The second string to compare.
+    /// - Returns: A Boolean value indicating whether the two strings are anagrams.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency & Performance`
+    ///
+    /// `Time Complexity`
+    /// - `lowercased()` runs in **O(n)** time.
+    /// - `replacingOccurrences(of: " ", with: "")` iterates through the string, running in **O(n)**.
+    /// - `sorted()` has a time complexity of **O(n log n)**.
+    /// - The final comparison between sorted arrays runs in **O(n)**.
+    /// - **Total Complexity: O(n log n)** due to sorting being the most expensive operation.
+    ///
+    /// `Space Complexity`
+    /// - Creating a lowercase version: **O(n)**.
+    /// - Removing spaces: **O(n)**.
+    /// - Sorting generates a new array: **O(n)**.
+    /// - **Total Space Complexity: O(n)**.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Performance Considerations`
+    ///
+    /// `Strengths`
+    /// ✅ Simple and easy to understand.
+    /// ✅ Handles **case insensitivity** by converting to lowercase.
+    /// ✅ Ignores spaces to allow anagrams with different spacing.
+    ///
+    /// `Potential Drawbacks`
+    /// ❌ **Sorting is expensive**: Using `sorted()` increases complexity to **O(n log n)**.
+    /// ❌ **Does not ignore special characters**: `"hello!"` and `"ohell!"` would be anagrams.
+    /// ❌ **Whitespace handling is limited**: Only spaces are removed, not tabs or newlines.
+    static func areAnaagramsUsingSimpleSortCompareImproved(_ string1: String, _ string2: String) -> Bool {
+        guard string1.count == string2.count else { return false }
+        return string1.lowercased().replacingOccurrences(of: " ", with: "").sorted() ==
+                string2.lowercased().replacingOccurrences(of: " ", with: "").sorted()
+    }
 }
