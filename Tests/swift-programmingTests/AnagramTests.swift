@@ -83,5 +83,23 @@ final class AnagramTests: XCTestCase {
     func test_areAnaagramsUsingSimpleSortCompareImproved_whiteSpace() {
         XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompareImproved("angel ", "glean"))
     }
+    
+    func test_areAnaagramsUsingSimpleSortCompareImproved_trueCase() {
+        for (word1, word2) in anagramPairs {
+            XCTAssertTrue(
+                Anagram.areAnaagramsUsingSimpleSortCompareImproved(word1, word2),
+                "Expected \(word1) and \(word2) to be anagrams"
+            )
+        }
+    }
+    
+    func test_areAnaagramsUsingSimpleSortCompareImproved_falseCase() {
+        for (word1, word2) in nonAnagramPairs {
+            XCTAssertFalse(
+                Anagram.areAnaagramsUsingSimpleSortCompareImproved(word1, word2),
+                "Expected \(word1) and \(word2) not to be anagrams"
+            )
+        }
+    }
 }
 
