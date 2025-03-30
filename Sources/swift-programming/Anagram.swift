@@ -117,35 +117,6 @@ struct Anagram {
     /// ❌ **Sorting is expensive**: Using `sorted()` increases complexity to **O(n log n)**.
     /// ❌ **Does not ignore special characters**: `"hello!"` and `"ohell!"` would be anagrams.
     /// ❌ **Whitespace handling is limited**: Only spaces are removed, not tabs or newlines.
-    ///
-    /// `Optimization Suggestion`
-    /// - Instead of sorting, consider using a **character frequency count approach**, which achieves **O(n) complexity**.
-    ///
-    /// Example:
-    /// ```swift
-    /// static func areAnagramsUsingFrequency(_ string1: String, _ string2: String) -> Bool {
-    ///     let normalized1 = string1.lowercased().filter { $0.isLetter }
-    ///     let normalized2 = string2.lowercased().filter { $0.isLetter }
-    ///
-    ///     guard normalized1.count == normalized2.count else { return false }
-    ///
-    ///     var charCount = [Character: Int]()
-    ///
-    ///     for char in normalized1 {
-    ///         charCount[char, default: 0] += 1
-    ///     }
-    ///
-    ///     for char in normalized2 {
-    ///         charCount[char, default: 0] -= 1
-    ///         if charCount[char]! < 0 { return false }
-    ///     }
-    ///
-    ///     return true
-    /// }
-    /// ```
-    /// - **O(n) time complexity** instead of **O(n log n)**.
-    /// - **Handles special characters better**.
-    /// - **More efficient for large inputs**.
     static func areAnaagramsUsingSimpleSortCompareImproved(_ string1: String, _ string2: String) -> Bool {
         guard string1.count == string2.count else { return false }
         return string1.lowercased().replacingOccurrences(of: " ", with: "").sorted() ==
