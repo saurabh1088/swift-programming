@@ -77,4 +77,10 @@ struct Anagram {
         }
         return sortedString1 == sortedString2
     }
+    
+    static func areAnaagramsUsingSimpleSortCompareImproved(_ string1: String, _ string2: String) -> Bool {
+        guard string1.count == string2.count else { return false }
+        return string1.lowercased().replacingOccurrences(of: " ", with: "").sorted() ==
+                string2.lowercased().replacingOccurrences(of: " ", with: "").sorted()
+    }
 }
