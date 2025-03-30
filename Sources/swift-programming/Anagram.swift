@@ -24,11 +24,11 @@ struct Anagram {
     ///
     /// `Correctness`
     ///
-    /// Core Logic:
-    /// The implementation correctly identifies anagrams by sorting and comparing the strings.
-    /// Two strings are anagrams if their sorted forms are identical.
+    /// `Core Logic`
+    /// - The implementation correctly identifies anagrams by sorting and comparing the strings.
+    /// - Two strings are anagrams if their sorted forms are identical.
     ///
-    /// Edge Cases:
+    /// `Edge Cases`
     /// - Empty Strings: areAnaagramsUsingSimpleSortCompare("", "") returns true (correct, as two empty strings are anagrams).
     /// - Different Lengths: areAnaagramsUsingSimpleSortCompare("cat", "cats") returns false (correct, as anagrams must have the same length).
     /// - Case Sensitivity: areAnaagramsUsingSimpleSortCompare("Cat", "cat") returns false (correct behavior depends on requirements, but this is the default Swift behavior since sorting is case-sensitive).
@@ -46,7 +46,10 @@ struct Anagram {
     /// - O(n) for the sorted arrays and resulting strings.
     ///
     /// `String Concatenation`
-    /// - Using + in reduce() repeatedly creates new String instances, which is inefficient due to string immutability in Swift. This could be optimized.
+    /// - Using + in reduce() repeatedly creates new String instances, which is inefficient due to string immutability in Swift.
+    /// - This means every concatenation creates a new copy of the string.
+    /// - This results in a quadratic O(n²) complexity due to repeated memory allocations.
+    /// - This could be optimized.
     ///
     /// ------------------------------------------------------------------------
     /// `Potential Issues`
