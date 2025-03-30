@@ -10,6 +10,28 @@ import XCTest
 
 final class AnagramTests: XCTestCase {
     
+    // MARK: Test data
+    let anagramPairs: [(String, String)] = [
+        ("listen", "silent"),
+        ("earth", "heart"),
+        ("evil", "vile"),
+        ("dusty", "study"),
+        ("angel", "glean"),
+        ("stressed", "desserts"),
+        ("brag", "grab"),
+        ("cinema", "iceman"),
+        ("save", "vase"),
+        ("night", "thing")
+    ]
+        
+    let nonAnagramPairs: [(String, String)] = [
+        ("hello", "world"),
+        ("swift", "swim"),
+        ("apple", "papel"),
+        ("moon", "soon"),
+        ("train", "brain")
+    ]
+    
     // MARK: Tests for function areAnaagramsUsingSimpleSortCompare
     func test_areAnaagramsUsingSimpleSortCompare_empty() {
         XCTAssertTrue(Anagram.areAnaagramsUsingSimpleSortCompare("", ""))
@@ -25,6 +47,24 @@ final class AnagramTests: XCTestCase {
     
     func test_areAnaagramsUsingSimpleSortCompare_whiteSpace() {
         XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompare("angel ", "glean"))
+    }
+    
+    func test_areAnaagramsUsingSimpleSortCompare_trueCase() {
+        for (word1, word2) in anagramPairs {
+            XCTAssertTrue(
+                Anagram.areAnaagramsUsingSimpleSortCompare(word1, word2),
+                "Expected \(word1) and \(word2) to be anagrams"
+            )
+        }
+    }
+    
+    func test_areAnaagramsUsingSimpleSortCompare_falseCase() {
+        for (word1, word2) in nonAnagramPairs {
+            XCTAssertFalse(
+                Anagram.areAnaagramsUsingSimpleSortCompare(word1, word2),
+                "Expected \(word1) and \(word2) not to be anagrams"
+            )
+        }
     }
     
     // MARK: Tests for function areAnaagramsUsingSimpleSortCompareImproved
