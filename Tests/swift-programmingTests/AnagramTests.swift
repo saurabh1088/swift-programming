@@ -15,11 +15,15 @@ final class AnagramTests: XCTestCase {
     }
     
     func test_areAnaagramsUsingSimpleSortCompare_differentLength() {
-        XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompare("abc", "abcd"))
+        XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompare("evil", "vilee"))
     }
     
     func test_areAnaagramsUsingSimpleSortCompare_differentCase() {
         XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompare("listen", "Silent"))
+    }
+    
+    func test_areAnaagramsUsingSimpleSortCompare_whiteSpace() {
+        XCTAssertFalse(Anagram.areAnaagramsUsingSimpleSortCompare("angel ", "glean"))
     }
 }
 
