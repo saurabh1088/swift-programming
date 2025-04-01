@@ -123,6 +123,43 @@ struct Anagram {
                 string2.lowercased().replacingOccurrences(of: " ", with: "").sorted()
     }
     
+    /// Checks if two given strings are anagrams of each other using character frequency counting.
+    ///
+    /// An anagram is a word or phrase formed by rearranging the letters of another.
+    /// This method normalizes both input strings by converting them to lowercase and removing spaces,
+    /// then constructs frequency dictionaries for each string to compare character counts.
+    ///
+    /// - Parameters:
+    ///   - string1: The first string to compare.
+    ///   - string2: The second string to compare.
+    /// - Returns: A Boolean value indicating whether the two strings are anagrams.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency & Performance`
+    ///
+    /// `Time Complexity`
+    /// - `lowercased()` runs in **O(n)**.
+    /// - `replacingOccurrences(of: " ", with: "")` runs in **O(n)**.
+    /// - Constructing the frequency dictionary requires **O(n)**.
+    /// - Comparing two dictionaries (bounded by unique characters) runs in **O(n)** in the worst case.
+    /// - **Total Complexity: O(n)** (faster than sorting-based approaches which take O(n log n)).
+    ///
+    /// `Space Complexity`
+    /// - Storing the normalized strings requires **O(n)**.
+    /// - Two frequency dictionaries, each requiring **O(n)** in the worst case (all unique characters).
+    /// - **Total Space Complexity: O(n)** (can be optimized to **O(1)** for limited alphabets like English).
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Performance Considerations`
+    ///
+    /// `Strengths`
+    /// ✅ More efficient than sorting-based methods (**O(n) vs. O(n log n)**).
+    /// ✅ Handles **case insensitivity** by converting to lowercase.
+    /// ✅ Ignores spaces, allowing anagrams with different spacing.
+    ///
+    /// `Potential Drawbacks`
+    /// ❌ Uses two dictionaries, which **doubles** memory usage (**O(2n)** instead of **O(n)**).
+    /// ❌ **Can be optimized**: A single dictionary could be used to count up for `string1` and count down for `string2`, reducing space complexity.
     static func areAnaagramsUsingCharacterFrequencyCount(_ string1: String, _ string2: String) -> Bool {
         let sanitisedStringOne = string1.lowercased().replacingOccurrences(of: " ", with: "")
         let sanitisedStringTwo = string2.lowercased().replacingOccurrences(of: " ", with: "")
