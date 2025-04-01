@@ -122,4 +122,24 @@ struct Anagram {
         return string1.lowercased().replacingOccurrences(of: " ", with: "").sorted() ==
                 string2.lowercased().replacingOccurrences(of: " ", with: "").sorted()
     }
+    
+    static func areAnaagramsUsingCharacterFrequencyCount(_ string1: String, _ string2: String) -> Bool {
+        let sanitisedStringOne = string1.lowercased().replacingOccurrences(of: " ", with: "")
+        let sanitisedStringTwo = string2.lowercased().replacingOccurrences(of: " ", with: "")
+        
+        guard sanitisedStringOne.count == sanitisedStringTwo.count else { return false }
+        
+        var frequencyDictionaryOne: [Character: Int] = [:]
+        var frequencyDictionaryTwo: [Character: Int] = [:]
+        
+        for character in sanitisedStringOne {
+            frequencyDictionaryOne[character, default: 0] += 1
+        }
+        
+        for character in sanitisedStringTwo {
+            frequencyDictionaryTwo[character, default: 0] += 1
+        }
+        
+        return frequencyDictionaryOne == frequencyDictionaryTwo
+    }
 }
