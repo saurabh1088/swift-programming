@@ -101,5 +101,40 @@ final class AnagramTests: XCTestCase {
             )
         }
     }
+    
+    // MARK: Tests for function areAnaagramsUsingCharacterFrequencyCount
+    func test_areAnaagramsUsingCharacterFrequencyCount_empty() {
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCount("", ""))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCount_differentLength() {
+        XCTAssertFalse(Anagram.areAnaagramsUsingCharacterFrequencyCount("evil", "vilee"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCount_differentCase() {
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCount("listen", "Silent"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCount_whiteSpace() {
+        XCTAssertFalse(Anagram.areAnaagramsUsingCharacterFrequencyCount("angel ", "glean"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCount_trueCase() {
+        for (word1, word2) in anagramPairs {
+            XCTAssertTrue(
+                Anagram.areAnaagramsUsingCharacterFrequencyCount(word1, word2),
+                "Expected \(word1) and \(word2) to be anagrams"
+            )
+        }
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCount_falseCase() {
+        for (word1, word2) in nonAnagramPairs {
+            XCTAssertFalse(
+                Anagram.areAnaagramsUsingCharacterFrequencyCount(word1, word2),
+                "Expected \(word1) and \(word2) not to be anagrams"
+            )
+        }
+    }
 }
 
