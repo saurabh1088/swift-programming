@@ -116,7 +116,7 @@ final class AnagramTests: XCTestCase {
     }
     
     func test_areAnaagramsUsingCharacterFrequencyCount_whiteSpace() {
-        XCTAssertFalse(Anagram.areAnaagramsUsingCharacterFrequencyCount("angel ", "glean"))
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCount("angel ", "glean"))
     }
     
     func test_areAnaagramsUsingCharacterFrequencyCount_trueCase() {
