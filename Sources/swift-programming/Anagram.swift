@@ -179,4 +179,61 @@ struct Anagram {
         
         return frequencyDictionaryOne == frequencyDictionaryTwo
     }
+    
+    /// Checks if two given strings are anagrams of each other using a single character frequency dictionary.
+    ///
+    /// An anagram is a word or phrase formed by rearranging the letters of another.
+    /// This method normalizes both input strings by converting them to lowercase and removing spaces,
+    /// then uses a single dictionary to count the frequency of each character in `string1` and decrement
+    /// the count based on characters in `string2`. If all character frequencies balance to zero, the strings
+    /// are anagrams of each other.
+    ///
+    /// - Parameters:
+    ///   - string1: The first string to compare.
+    ///   - string2: The second string to compare.
+    /// - Returns: A Boolean value indicating whether the two strings are anagrams.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency & Performance`
+    ///
+    /// `Time Complexity`
+    /// - `lowercased()` and `replacingOccurrences(of: " ", with: "")` run in **O(n)**.
+    /// - Constructing and updating the frequency dictionary runs in **O(n)**.
+    /// - Checking that all dictionary values are zero runs in **O(n)**.
+    /// - **Total Complexity: O(n)**.
+    ///
+    /// `Space Complexity`
+    /// - One frequency dictionary is used, requiring **O(n)** space in the worst case (all unique characters).
+    /// - **Total Space Complexity: O(n)**, which is more space-efficient than the two-dictionary variant.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Performance Considerations`
+    ///
+    /// `Strengths`
+    /// ✅ Most efficient approach among all provided implementations (**O(n)** time and space).
+    /// ✅ Uses a single dictionary, reducing memory usage compared to two-dictionary approaches.
+    /// ✅ Handles **case insensitivity**.
+    /// ✅ Ignores spaces.
+    ///
+    /// `Potential Drawbacks`
+    /// ❌ Does not remove tabs, newlines, or punctuation—only spaces are removed.
+    /// ❌ Assumes both strings are ASCII-safe; extended Unicode may require more careful normalization.
+    static func areAnaagramsUsingCharacterFrequencyCountUsingSingleDict(_ string1: String, _ string2: String) -> Bool {
+        let sanitisedStringOne = string1.lowercased().replacingOccurrences(of: " ", with: "")
+        let sanitisedStringTwo = string2.lowercased().replacingOccurrences(of: " ", with: "")
+        
+        guard sanitisedStringOne.count == sanitisedStringTwo.count else { return false }
+        
+        var frequencyDictionary: [Character: Int] = [:]
+        
+        for character in sanitisedStringOne {
+            frequencyDictionary[character, default: 0] += 1
+        }
+        
+        for character in sanitisedStringTwo {
+            frequencyDictionary[character, default: 0] -= 1
+        }
+        
+        return frequencyDictionary.values.allSatisfy { $0 == 0 }
+    }
 }
