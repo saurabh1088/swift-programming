@@ -136,5 +136,40 @@ final class AnagramTests: XCTestCase {
             )
         }
     }
+    
+    // MARK: Tests for areAnaagramsUsingCharacterFrequencyCountUsingSingleDict
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_empty() {
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict("", ""))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_differentLength() {
+        XCTAssertFalse(Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict("evil", "vilee"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_differentCase() {
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict("listen", "Silent"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_whiteSpace() {
+        XCTAssertTrue(Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict("angel ", "glean"))
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_trueCase() {
+        for (word1, word2) in anagramPairs {
+            XCTAssertTrue(
+                Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict(word1, word2),
+                "Expected \(word1) and \(word2) to be anagrams"
+            )
+        }
+    }
+    
+    func test_areAnaagramsUsingCharacterFrequencyCountUsingSingleDict_falseCase() {
+        for (word1, word2) in nonAnagramPairs {
+            XCTAssertFalse(
+                Anagram.areAnaagramsUsingCharacterFrequencyCountUsingSingleDict(word1, word2),
+                "Expected \(word1) and \(word2) not to be anagrams"
+            )
+        }
+    }
 }
 
