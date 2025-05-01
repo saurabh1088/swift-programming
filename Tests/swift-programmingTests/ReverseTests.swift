@@ -11,13 +11,14 @@ import XCTest
 final class ReverseTests: XCTestCase {
     
     func test_reverseString_withEmptyString() {
-        let inputString = ""
-        XCTAssertEqual(Reverse.reverseString(inputString), inputString)
+        let input = ""
+        let expected = ""
+        XCTAssertEqual(Reverse.reverseString(input), expected)
     }
     
     func test_reverseString_withRegularString() {
-        let inputString = "Hello World"
-        let reversedString = "dlroW olleH"
-        XCTAssertEqual(Reverse.reverseString(inputString), reversedString)
+        let input = "hello!"
+        let expected = "!olleh"
+        XCTAssertEqual(Reverse.reverseString(input), expected)
     }
 }
