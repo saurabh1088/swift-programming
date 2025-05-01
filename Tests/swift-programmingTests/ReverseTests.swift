@@ -15,7 +15,7 @@ final class ReverseTests: XCTestCase {
         XCTAssertEqual(Reverse.reverseString(inputString), inputString)
     }
     
-    func test_reverseString() {
+    func test_reverseString_withRegularString() {
         let inputString = "Hello World"
         let reversedString = "dlroW olleH"
         XCTAssertEqual(Reverse.reverseString(inputString), reversedString)
