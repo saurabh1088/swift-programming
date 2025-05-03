@@ -29,19 +29,19 @@ final class ReverseTests: XCTestCase {
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
     
-    func testReverseString_withWhitespace() {
+    func test_reverseString_withWhitespace() {
         let input = "a b c"
         let expected = "c b a"
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
 
-    func testReverseString_withUnicodeCharacters() {
+    func test_reverseString_withUnicodeCharacters() {
         let input = "🙂🙃"
         let expected = "🙃🙂"
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
 
-    func testReverseString_withPalindromes() {
+    func test_reverseString_withPalindromes() {
         let input = "madam"
         let expected = "madam"
         XCTAssertEqual(Reverse.reverseString(input), expected)
