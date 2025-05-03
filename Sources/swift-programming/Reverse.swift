@@ -64,4 +64,10 @@ struct Reverse {
     static func reverseString(_ input: String) -> String {
         return String(input.reversed())
     }
+    
+    static func reverseStringUsingReduce(_ input: String) -> String {
+        return input.reduce("") { partialResult, character in
+            String(character) + partialResult
+        }
+    }
 }
