@@ -65,6 +65,56 @@ struct Reverse {
         return String(input.reversed())
     }
     
+    /// Reverses the characters in a given string using reduce.
+    ///
+    /// This method takes an input string and returns a new string with all characters in reverse order.
+    /// The implementation uses the reduce method, prepending each character to the accumulator string.
+    ///
+    /// - Parameters:
+    ///   - input: The string to be reversed.
+    /// - Returns: A new string with the characters in reverse order.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Validation`
+    ///
+    /// `Correctness`
+    ///
+    /// `Core Logic`
+    /// - The implementation correctly reverses a string by using reduce to iterate over characters.
+    /// - Each character is prepended to the accumulator, effectively reversing the order.
+    ///
+    /// `Edge Cases`
+    /// - Empty String: reverseStringUsingReduce("") returns "" (correct).
+    /// - Single Character: reverseStringUsingReduce("a") returns "a" (correct).
+    /// - Unicode: reverseStringUsingReduce("héllo") returns "olléh" (correct, handles Unicode).
+    /// - Whitespace: reverseStringUsingReduce("hello world") returns "dlrow olleh" (correct).
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// - Each character is processed once: O(n) where n is the input string length.
+    /// - Each prepend operation creates a new string: O(n) per operation in worst case.
+    /// - Total: O(n^2) in the worst case due to repeated string allocations.
+    ///
+    /// `Space Complexity`
+    /// - O(n^2) in the worst case due to repeated allocations from prepending.
+    ///
+    /// `String Construction`
+    /// - Constructs new intermediate strings during each reduce step.
+    /// - Less efficient than using reversed() due to repeated copying.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Potential Issues`
+    ///
+    /// `Performance`
+    /// - Less efficient due to repeated string allocations when prepending.
+    ///
+    /// `Unicode Handling`
+    /// - Correctly handles Unicode characters due to Swift’s String model.
+    ///
+    /// `Memory`
+    /// - Allocates multiple intermediate strings, unlike the reversed() approach.
     static func reverseStringUsingReduce(_ input: String) -> String {
         return input.reduce("") { partialResult, character in
             String(character) + partialResult
