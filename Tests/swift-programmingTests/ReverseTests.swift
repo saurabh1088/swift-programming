@@ -10,6 +10,7 @@ import XCTest
 
 final class ReverseTests: XCTestCase {
     
+    // MARK: Tests for function reverseString
     func test_reverseString_withEmptyString() {
         let input = ""
         let expected = ""
@@ -28,21 +29,58 @@ final class ReverseTests: XCTestCase {
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
     
-    func testReverseString_withWhitespace() {
+    func test_reverseString_withWhitespace() {
         let input = "a b c"
         let expected = "c b a"
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
 
-    func testReverseString_withUnicodeCharacters() {
+    func test_reverseString_withUnicodeCharacters() {
         let input = "🙂🙃"
         let expected = "🙃🙂"
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
 
-    func testReverseString_withPalindromes() {
+    func test_reverseString_withPalindromes() {
         let input = "madam"
         let expected = "madam"
         XCTAssertEqual(Reverse.reverseString(input), expected)
+    }
+    
+    // MARK: Tests for function reverseStringUsingReduce
+    func test_reverseStringUsingReduce_withEmptyString() {
+        let input = ""
+        let expected = ""
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
+    }
+    
+    func test_reverseStringUsingReduce_withRegularString() {
+        let input = "hello!"
+        let expected = "!olleh"
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
+    }
+    
+    func test_reverseStringUsingReduce_withSingleCharacterString() {
+        let input = "a"
+        let expected = "a"
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
+    }
+    
+    func test_reverseStringUsingReduce_withWhitespace() {
+        let input = "a b c"
+        let expected = "c b a"
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
+    }
+
+    func test_reverseStringUsingReduce_withUnicodeCharacters() {
+        let input = "🙂🙃"
+        let expected = "🙃🙂"
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
+    }
+
+    func test_reverseStringUsingReduce_withPalindromes() {
+        let input = "madam"
+        let expected = "madam"
+        XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
     }
 }
