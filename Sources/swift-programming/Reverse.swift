@@ -120,4 +120,12 @@ struct Reverse {
             String(character) + partialResult
         }
     }
+    
+    static func reverseStringUsingLoop(_ input: String) -> String {
+        var reversedString = ""
+        for character in input.replacingOccurrences(of: " ", with: "") {
+            reversedString = String(character) + reversedString
+        }
+        return reversedString
+    }
 }
