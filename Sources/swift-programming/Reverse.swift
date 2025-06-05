@@ -171,7 +171,7 @@ struct Reverse {
     /// - Properly handles Unicode characters due to Swift’s String model.
     static func reverseStringUsingLoop(_ input: String) -> String {
         var reversedString = ""
-        for character in input.replacingOccurrences(of: " ", with: "") {
+        for character in input {
             // string concatenation, especially when performed repeatedly by prepending a character, can be inefficient.
             // here this operation leads to time complexity of O(n^2)
             reversedString = String(character) + reversedString
