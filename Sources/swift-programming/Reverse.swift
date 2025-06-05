@@ -120,4 +120,62 @@ struct Reverse {
             String(character) + partialResult
         }
     }
+    
+
+    /// Reverses the characters in a given string using a for-loop.
+    ///
+    /// This method removes all whitespace from the input string, then reverses the characters using a for-loop.
+    /// It builds the reversed string by prepending each character, which effectively reverses the order.
+    ///
+    /// - Parameters:
+    ///   - input: The string to be reversed.
+    /// - Returns: A new string with the characters reversed and spaces removed.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Validation`
+    ///
+    /// `Correctness`
+    ///
+    /// `Core Logic`
+    /// - Removes whitespace using replacingOccurrences(of:with:).
+    /// - Iterates through each character and prepends it to the result string.
+    ///
+    /// `Edge Cases`
+    /// - Empty String: reverseStringUsingLoop("") returns "".
+    /// - Only Spaces: reverseStringUsingLoop("   ") returns "".
+    /// - Single Character: reverseStringUsingLoop("a") returns "a".
+    /// - Unicode: reverseStringUsingLoop("héllo") returns "olléh".
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// - O(n^2) in the worst case due to string prepending inside the loop.
+    ///
+    /// `Space Complexity`
+    /// - O(n^2) due to intermediate string allocations.
+    ///
+    /// `String Construction`
+    /// - Each prepend operation allocates a new string.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Potential Issues`
+    ///
+    /// `Performance`
+    /// - Repeated prepending causes poor performance on long strings.
+    ///
+    /// `Whitespace Handling`
+    /// - Intentionally removes all whitespaces before reversal.
+    ///
+    /// `Unicode Handling`
+    /// - Properly handles Unicode characters due to Swift’s String model.
+    static func reverseStringUsingLoop(_ input: String) -> String {
+        var reversedString = ""
+        for character in input {
+            // string concatenation, especially when performed repeatedly by prepending a character, can be inefficient.
+            // here this operation leads to time complexity of O(n^2)
+            reversedString = String(character) + reversedString
+        }
+        return reversedString
+    }
 }
