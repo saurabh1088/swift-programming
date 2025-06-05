@@ -10,6 +10,7 @@ import XCTest
 
 final class ReverseTests: XCTestCase {
     
+    /// ------------------------------------------------------------------------
     // MARK: Tests for function reverseString
     func test_reverseString_withEmptyString() {
         let input = ""
@@ -47,6 +48,7 @@ final class ReverseTests: XCTestCase {
         XCTAssertEqual(Reverse.reverseString(input), expected)
     }
     
+    /// ------------------------------------------------------------------------
     // MARK: Tests for function reverseStringUsingReduce
     func test_reverseStringUsingReduce_withEmptyString() {
         let input = ""
@@ -84,6 +86,7 @@ final class ReverseTests: XCTestCase {
         XCTAssertEqual(Reverse.reverseStringUsingReduce(input), expected)
     }
 
+    /// ------------------------------------------------------------------------
     // MARK: Tests for function reverseStringUsingLoop
     func test_reverseStringUsingLoop_withEmptyString() {
         let input = ""
