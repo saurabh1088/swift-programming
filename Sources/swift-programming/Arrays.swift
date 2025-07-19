@@ -7,5 +7,16 @@
 
 import Foundation
 
-struct Arrays {}
+struct Arrays {
+    
+    static func largestElement(in array: [Int]) -> Int {
+        var largestElement = array[0]
+        for item in array {
+            if item > largestElement {
+                largestElement = item
+            }
+        }
+        return largestElement
+    }
+}
 
