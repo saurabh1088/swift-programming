@@ -10,7 +10,7 @@ import XCTest
 
 final class ArraysTests: XCTestCase {
     
-    func test_largestElement() {
+    func test_largestElement_Int() {
         XCTAssertEqual(Arrays.largestElement(in: [3, 2, 5, 1, 0, 22, 32, 12, 44, 89, 23, 34, 60, 50]), 89)
         XCTAssertEqual(Arrays.largestElement(in: [10, 5, 15, 20, 0, 8, 25, 30, 2, 12, 7, 18, 22]), 30)
         XCTAssertEqual(Arrays.largestElement(in: [99, 1, 88, 2, 77, 3, 66, 4, 55, 5, 44, 6, 33, 7, 22, 8, 11, 9]), 99)
@@ -21,5 +21,25 @@ final class ArraysTests: XCTestCase {
         XCTAssertEqual(Arrays.largestElement(in: [Int]()), nil)
         XCTAssertEqual(Arrays.largestElement(in: [-5, -10, 0, 1, -2, 8, 15, -1]), 15)
         XCTAssertEqual(Arrays.largestElement(in: [1000, 500, 750, 250, 1250, 100, 1500, 50, 1750, 2000]), 2000)
+    }
+    
+    func test_largestElement_Double() {
+        XCTAssertEqual(Arrays.largestElement(in: [3.14, 2.71, 5.0, 1.618, 0.0, 22.5]), 22.5)
+        XCTAssertEqual(Arrays.largestElement(in: [-1.0, -0.5, -2.0]), -0.5)
+        XCTAssertNil(Arrays.largestElement(in: [Double]()))
+    }
+    
+    func test_largestElement_Strings() {
+        XCTAssertEqual(Arrays.largestElement(in: ["apple", "banana", "cherry", "date"]), "date")
+        XCTAssertEqual(Arrays.largestElement(in: ["zebra", "apple", "cat"]), "zebra")
+        XCTAssertEqual(Arrays.largestElement(in: ["Swift", "Python", "Java", "Kotlin"]), "Swift")
+        XCTAssertNil(Arrays.largestElement(in: [String]()))
+    }
+    
+    func test_largestElement_Unicode_Scalars() {
+        XCTAssertEqual(Arrays.largestElement(in: ["a", "b", "c"]), "c")
+        XCTAssertEqual(Arrays.largestElement(in: ["Z", "A", "M"]), "Z")
+        XCTAssertEqual(Arrays.largestElement(in: ["!", "@", "#"]), "@")
+        XCTAssertNil(Arrays.largestElement(in: [Character]()))
     }
 }
