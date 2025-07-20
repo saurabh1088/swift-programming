@@ -33,5 +33,19 @@ struct Arrays {
         }
         return largestElement
     }
+    
+    static func largestElementUsingRecursion<T: Comparable>(in array: [T]) -> T? {
+        guard array.isEmpty == false else { return nil }
+        var largestElement = array[0]
+        if array.count != 1 {
+            var largestElementFromRestOfArray: T?
+            largestElementFromRestOfArray = largestElementUsingRecursion(in: Array(array.dropFirst()))
+            if let largestElementFromRestOfArray = largestElementFromRestOfArray,
+               largestElementFromRestOfArray > largestElement {
+                largestElement = largestElementFromRestOfArray
+            }
+        }
+        return largestElement
+    }
 }
 
