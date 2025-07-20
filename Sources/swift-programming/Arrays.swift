@@ -8,7 +8,17 @@
 import Foundation
 
 struct Arrays {
-    
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// `O(n)`
+    /// - For loop is the dominant part of this algorithm
+    /// - For loop iterates through every element, hence time complexity of O(n)
+    ///
+    /// `Space Complexity`
+    /// `O(1)`
+    /// - For loop iteration is over an existing array, hence no new memory is created
     static func largestElement(in array: [Int]) -> Int? {
         guard array.isEmpty == false else { return nil }
         var largestElement = array[0]
