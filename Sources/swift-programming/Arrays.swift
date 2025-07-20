@@ -19,7 +19,7 @@ struct Arrays {
     /// `Space Complexity`
     /// `O(1)`
     /// - For loop iteration is over an existing array, hence no new memory is created
-    static func largestElement(in array: [Int]) -> Int? {
+    static func largestElement<T: Comparable>(in array: [T]) -> T? {
         guard array.isEmpty == false else { return nil }
         var largestElement = array[0]
         for item in array {

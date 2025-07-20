@@ -18,7 +18,7 @@ final class ArraysTests: XCTestCase {
         XCTAssertEqual(Arrays.largestElement(in: [7, 1, 9, 3, 5]), 9)
         XCTAssertEqual(Arrays.largestElement(in: [111, 222, 333, 444, 555, 666, 777, 888, 999]), 999)
         XCTAssertEqual(Arrays.largestElement(in: [42]), 42)
-        XCTAssertEqual(Arrays.largestElement(in: []), nil)
+        XCTAssertEqual(Arrays.largestElement(in: [Int]()), nil)
         XCTAssertEqual(Arrays.largestElement(in: [-5, -10, 0, 1, -2, 8, 15, -1]), 15)
         XCTAssertEqual(Arrays.largestElement(in: [1000, 500, 750, 250, 1250, 100, 1500, 50, 1750, 2000]), 2000)
     }
