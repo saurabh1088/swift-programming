@@ -19,6 +19,10 @@ struct Arrays {
     /// `Space Complexity`
     /// `O(1)`
     /// - For loop iteration is over an existing array, hence no new memory is created
+    ///
+    /// `Alternative`
+    /// In `Swift` when `Array` element conforms to `Comparable` then instance method `max()`
+    /// is available, which also has complexity of `O(n)`
     static func largestElement<T: Comparable>(in array: [T]) -> T? {
         guard array.isEmpty == false else { return nil }
         var largestElement = array[0]
