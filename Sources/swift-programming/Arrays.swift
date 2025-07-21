@@ -34,6 +34,19 @@ struct Arrays {
         return largestElement
     }
     
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// `O(n^2)`
+    /// - Array(array.dropFirst()) is the dominant factor
+    /// - array.dropFirst() in Swift, this returns an ArraySlice (a view into the original array) in O(1) time. This part is efficient.
+    /// - Array(...) However, converting that ArraySlice back into a new Array requires copying all elements
+    /// from the slice into a new contiguous memory block. If the slice has k elements, this copy operation takes O(k) time.
+    ///
+    /// `Space Complexity`
+    /// `O(n^2)`
+    /// - Every time array is created for sliced part, it leads to new memory allocations.
     static func largestElementUsingRecursion<T: Comparable>(in array: [T]) -> T? {
         guard array.isEmpty == false else { return nil }
         var largestElement = array[0]
