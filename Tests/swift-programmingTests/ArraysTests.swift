@@ -114,4 +114,39 @@ final class ArraysTests: XCTestCase {
         XCTAssertEqual(Arrays.smallestElement(in: ["!", "@", "#"]), "!")
         XCTAssertNil(Arrays.smallestElement(in: [Character]()))
     }
+    
+    // -------------------------------------------------------------------------
+    // MARK: Tests for function smallestElementUsingRecursion<T: Comparable>(in array: [T]) -> T?
+    func test_smallestElementUsingRecursion_Int() {
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [3, 2, 5, 1, 0, 22, 32, 12, 44, 89, 23, 34, 60, 50]), 0)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [10, 5, 15, 20, 0, 8, 25, 30, 2, 12, 7, 18, 22]), 0)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [99, 1, 88, 2, 77, 3, 66, 4, 55, 5, 44, 6, 33, 7, 22, 8, 11, 9]), 1)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [100, 200, 50, 300, 10, 400, 250, 150, 500]), 10)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [7, 1, 9, 3, 5]), 1)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [111, 222, 333, 444, 555, 666, 777, 888, 999]), 111)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [42]), 42)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [Int]()), nil)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [-5, -10, 0, 1, -2, 8, 15, -1]), -10)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [1000, 500, 750, 250, 1250, 100, 1500, 50, 1750, 2000]), 50)
+    }
+    
+    func test_smallestElementUsingRecursion_Double() {
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [3.14, 2.71, 5.0, 1.618, 0.0, 22.5]), 0.0)
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: [-1.0, -0.5, -2.0]), -2.0)
+        XCTAssertNil(Arrays.smallestElementUsingRecursion(in: [Double]()))
+    }
+    
+    func test_smallestElementUsingRecursion_Strings() {
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["apple", "banana", "cherry", "date"]), "apple")
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["zebra", "apple", "cat"]), "apple")
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["Swift", "Python", "Java", "Kotlin"]), "Java")
+        XCTAssertNil(Arrays.smallestElementUsingRecursion(in: [String]()))
+    }
+    
+    func test_smallestElementUsingRecursion_Unicode_Scalars() {
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["a", "b", "c"]), "a")
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["Z", "A", "M"]), "A")
+        XCTAssertEqual(Arrays.smallestElementUsingRecursion(in: ["!", "@", "#"]), "!")
+        XCTAssertNil(Arrays.smallestElementUsingRecursion(in: [Character]()))
+    }
 }

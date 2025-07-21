@@ -75,5 +75,19 @@ extension Arrays {
         }
         return smallestElement
     }
+    
+    static func smallestElementUsingRecursion<T: Comparable>(in array: [T]) -> T? {
+        guard array.isEmpty == false else { return nil }
+        var smallestElement = array[0]
+        if array.count != 1 {
+            var smallestElementFromRestOfArray: T?
+            smallestElementFromRestOfArray = smallestElementUsingRecursion(in: Array(array.dropFirst()))
+            if let smallestElementFromRestOfArray = smallestElementFromRestOfArray,
+               smallestElementFromRestOfArray < smallestElement {
+                smallestElement = smallestElementFromRestOfArray
+            }
+        }
+        return smallestElement
+    }
 }
 
