@@ -62,3 +62,18 @@ struct Arrays {
     }
 }
 
+extension Arrays {
+    
+    static func smallestElement<T: Comparable>(in array: [T]) -> T? {
+        guard array.isEmpty == false else { return nil }
+        guard array.count > 1 else { return array.first }
+        var smallestElement = array[0]
+        for element in array {
+            if element < smallestElement {
+                smallestElement = element
+            }
+        }
+        return smallestElement
+    }
+}
+
