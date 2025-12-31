@@ -10,6 +10,9 @@ import Foundation
 struct SlidingWindow {
     
     static func maximumSubArraySum(for array: [Int], of windowSize: Int) -> Int {
+        guard !array.isEmpty, array.count >= windowSize else {
+            return 0
+        }
         var currentSum = 0
         var maxSum = 0
         let startingIndex = windowSize - 1
