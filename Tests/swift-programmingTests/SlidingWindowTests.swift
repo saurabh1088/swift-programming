@@ -10,9 +10,18 @@ import XCTest
 
 final class SlidingWindowTests: XCTestCase {
     
-    func test_maximumSubArraySum_returnsCorrectSum() {
+    func test_maximumSubArraySum_validArray() {
         let input: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 4, 2, 5, 7, 23, 6, 7, 9, 5, 6, 7, 1]
         let expected: Int = 36
+        
+        let result = SlidingWindow.maximumSubArraySum(for: input, of: 3)
+        
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_maximumSubArraySum_invalidArray() {
+        let input: [Int] = []
+        let expected: Int = 0
         
         let result = SlidingWindow.maximumSubArraySum(for: input, of: 3)
         
