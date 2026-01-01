@@ -73,7 +73,7 @@ struct SlidingWindow {
     /// - Properly validates that window size is not greater than array count.
     /// - Returns nil for invalid inputs, which is appropriate behavior.
     static func maximumSubArraySum(for array: [Int], of windowSize: Int) -> Int? {
-        guard !array.isEmpty, array.count >= windowSize else {
+        guard !array.isEmpty, windowSize > 0, array.count >= windowSize else {
             return nil
         }
         var currentSum = 0
