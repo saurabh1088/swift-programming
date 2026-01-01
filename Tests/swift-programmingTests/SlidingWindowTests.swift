@@ -21,7 +21,7 @@ final class SlidingWindowTests: XCTestCase {
     
     func test_maximumSubArraySum_invalidArrayEmpty() {
         let input: [Int] = []
-        let expected: Int = 0
+        let expected: Int? = nil
         
         let result = SlidingWindow.maximumSubArraySum(for: input, of: 3)
         
@@ -30,7 +30,7 @@ final class SlidingWindowTests: XCTestCase {
     
     func test_maximumSubArraySum_invalidArrayLesserSizeThanSlidingWindow() {
         let input: [Int] = [1, 2]
-        let expected: Int = 0
+        let expected: Int? = nil
         
         let result = SlidingWindow.maximumSubArraySum(for: input, of: 3)
         
