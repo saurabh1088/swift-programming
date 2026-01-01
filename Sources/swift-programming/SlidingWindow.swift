@@ -7,6 +7,14 @@
 
 import Foundation
 
+/**
+ - TODOs
+ - 1. Variable-Size (Dynamic) Windows
+ - 2. String-Based Windows with HashMaps
+ - 3. Advanced State Management (The Monotonic Queue)
+ - 4. Auxiliary Optimization: Two-Pointers vs. Sliding Window
+ - 5. Bitmasking with Windows
+ */
 struct SlidingWindow {
     
     static func maximumSubArraySum(for array: [Int], of windowSize: Int) -> Int? {
