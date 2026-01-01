@@ -45,4 +45,13 @@ final class SlidingWindowTests: XCTestCase {
         
         XCTAssertEqual(result, expected)
     }
+    
+    func test_maximumSubArraySum_zeroWindowSize() {
+        let input: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 4, 2, 5, 7, 23, 6, 7, 9, 5, 6, 7, 1]
+        let expected: Int = 0
+        
+        let result = SlidingWindow.maximumSubArraySum(for: input, of: 0)
+        
+        XCTAssertEqual(result, expected)
+    }
 }
