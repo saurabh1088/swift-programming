@@ -98,7 +98,7 @@ struct SlidingWindow {
         return maxSum
     }
     
-    func minimumSubArrayLength(withSum targetSum: Int, forArray array: [Int]) -> Int? {
+    static func minimumSubArrayLength(withSum targetSum: Int, forArray array: [Int]) -> Int? {
         var leftIndex = 0
         var sum = 0
         var minLength = Int.max
