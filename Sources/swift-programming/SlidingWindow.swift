@@ -7,6 +7,47 @@
 
 import Foundation
 
+/// A utility struct providing efficient sliding window algorithms for array processing.
+///
+/// The `SlidingWindow` struct implements optimized solutions for common array problems using
+/// the sliding window technique. This technique maintains a window of elements that slides
+/// across the array, avoiding redundant calculations and achieving optimal time complexity.
+///
+/// ## Sliding Window Technique
+///
+/// The sliding window technique is an algorithmic approach that maintains a subset of elements
+/// (a "window") that moves through a larger collection. Instead of recalculating values for
+/// every possible subarray, the algorithm efficiently updates the window by adding new elements
+/// and removing old ones, typically achieving O(n) time complexity instead of O(n²) or O(n*k).
+///
+/// ## Available Methods
+///
+/// - `maximumSubArraySum(for:of:)` - Finds the maximum sum of a subarray with a fixed window size.
+/// - `minimumSubArrayLength(withSum:forArray:)` - Finds the minimum length subarray with sum >= target.
+///
+/// ## Usage Example
+///
+/// ```swift
+/// // Find maximum sum of subarray of size 3
+/// let array = [1, 4, 2, 10, 23, 3, 1, 0, 20]
+/// if let maxSum = SlidingWindow.maximumSubArraySum(for: array, of: 3) {
+///     print("Maximum sum: \(maxSum)") // Prints: Maximum sum: 36
+/// }
+///
+/// // Find minimum length subarray with sum >= 7
+/// let array2 = [2, 1, 5, 2, 3, 2]
+/// if let minLength = SlidingWindow.minimumSubArrayLength(withSum: 7, forArray: array2) {
+///     print("Minimum length: \(minLength)") // Prints: Minimum length: 2
+/// }
+/// ```
+///
+/// ## Performance Characteristics
+///
+/// All methods in this struct are optimized for performance:
+/// - **Time Complexity**: O(n) where n is the array length
+/// - **Space Complexity**: O(1) constant extra space
+///
+/// - Note: This struct contains only static methods and should not be instantiated.
 struct SlidingWindow {
     
     /// Finds the maximum sum of a subarray of a given window size using the sliding window technique.
