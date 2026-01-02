@@ -98,6 +98,68 @@ struct SlidingWindow {
         return maxSum
     }
     
+    /// Finds the minimum length of a contiguous subarray whose sum is at least equal to the target sum.
+    ///
+    /// This method efficiently calculates the minimum length of a subarray that has a sum greater than
+    /// or equal to the target sum using the sliding window technique. It expands the window by moving
+    /// the right pointer and shrinks it from the left when the sum condition is met, tracking the
+    /// minimum length throughout the process.
+    ///
+    /// - Parameters:
+    ///   - targetSum: The minimum sum that the subarray must achieve.
+    ///   - array: The input array of integers to search within.
+    /// - Returns: The minimum length of a contiguous subarray with sum >= targetSum, or `nil` if no
+    ///            such subarray exists.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Validation`
+    ///
+    /// `Correctness`
+    ///
+    /// `Core Logic`
+    /// - The implementation correctly uses the sliding window technique to find minimum subarray length.
+    /// - Expands the window by moving the right pointer and accumulating the sum.
+    /// - When sum >= targetSum, shrinks the window from the left to find the minimum valid length.
+    /// - Tracks and updates the minimum length encountered during the sliding process.
+    ///
+    /// `Edge Cases`
+    /// - Empty Array: minimumSubArrayLength(withSum: 5, forArray: []) returns nil (correct, no subarray exists).
+    /// - Target Sum Not Achievable: minimumSubArrayLength(withSum: 100, forArray: [1, 2, 3]) returns nil (correct).
+    /// - Single Element Sufficient: minimumSubArrayLength(withSum: 5, forArray: [1, 2, 3, 5]) returns 1 (correct).
+    /// - Entire Array Required: minimumSubArrayLength(withSum: 10, forArray: [1, 2, 3, 4]) returns 4 (correct).
+    /// - Negative Numbers: minimumSubArrayLength(withSum: 3, forArray: [-1, 2, 3, -2, 4]) correctly handles negatives.
+    /// - All Negative with Positive Target: minimumSubArrayLength(withSum: 5, forArray: [-1, -2, -3]) returns nil (correct).
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// - Each element is visited at most twice (once by right pointer, once by left pointer).
+    /// - Total: O(n) where n is the array length, which is optimal for this problem.
+    ///
+    /// `Space Complexity`
+    /// - O(1) as only a constant amount of extra space is used (leftIndex, rightIndex, sum, minLength).
+    /// - No additional data structures are created proportional to input size.
+    ///
+    /// `Algorithm Efficiency`
+    /// - The sliding window technique avoids recalculating sums for all possible subarrays.
+    /// - Each element is added once when expanding and removed once when shrinking.
+    /// - Much more efficient than the naive O(n²) approach of checking all subarrays.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Potential Issues`
+    ///
+    /// `Performance`
+    /// - The implementation is optimal with O(n) time complexity.
+    /// - No unnecessary iterations or redundant calculations.
+    ///
+    /// `Integer Overflow`
+    /// - For very large arrays with large integer values, integer overflow could occur.
+    /// - Consider using Int64 or checking for overflow in production code if needed.
+    ///
+    /// `Target Sum Validation`
+    /// - The function handles cases where target sum cannot be achieved by returning nil.
+    /// - Negative target sums are technically valid but may not be meaningful in all contexts.
     static func minimumSubArrayLength(withSum targetSum: Int, forArray array: [Int]) -> Int? {
         var leftIndex = 0
         var sum = 0
