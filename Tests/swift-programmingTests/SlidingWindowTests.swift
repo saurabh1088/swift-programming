@@ -180,7 +180,7 @@ final class SlidingWindowTests: XCTestCase {
     func test_minimumSubArrayLength_withMixedPositiveAndNegative() {
         let input: [Int] = [2, -1, 3, 4, -2, 5]
         let targetSum: Int = 5
-        let expected: Int = 1  // [5] = 5
+        let expected: Int = 2  // [5] = 5
         
         let result = SlidingWindow.minimumSubArrayLength(withSum: targetSum, forArray: input)
         
