@@ -219,6 +219,16 @@ struct SlidingWindow {
         return minLength == Int.max ? nil : minLength
     }
     
+    /**
+     1. The "Moving Average" (Arrays)
+     The Goal: Given an array of numbers, return a new array where each element is the average of the current number and the one before it.
+
+     Why do this? In your System Pulse tool, raw CPU data is "spiky." Engineers use moving averages to "smooth" the data for a better UI.
+
+     Input: [10, 20, 30, 40]
+
+     Output: [10.0, 15.0, 25.0, 35.0] (Note: The first element stays the same or averages with 0).
+     */
     static func movingAverage() {
         let array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         var finalArray = [Int]()
