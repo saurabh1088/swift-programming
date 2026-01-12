@@ -218,4 +218,16 @@ struct SlidingWindow {
         }
         return minLength == Int.max ? nil : minLength
     }
+    
+    static func movingAverage() {
+        let array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        var finalArray = [Int]()
+        finalArray.append(array[0])
+        for index in 1..<array.count {
+            let sum = array[index - 1] + array[index]
+            let average = sum / 2
+            finalArray.append(average)
+        }
+        print(finalArray)
+    }
 }
