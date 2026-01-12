@@ -240,4 +240,49 @@ struct SlidingWindow {
         }
         print(finalArray)
     }
+    
+    // TODO: Future TODOs
+    /**
+
+     ### 2. The "Two-Pointer" Reverse (Strings)
+
+     **The Goal:** Write a function that takes a string and returns it reversed **without** using the built-in `.reversed()` method.
+
+     * **Why do this?** This is the foundation of the **Two-Pointer technique**. You’ll have a `left` pointer at index 0 and a `right` pointer at the end, swapping them as they move toward the middle.
+     * **Logic Visualization:**
+
+     ---
+
+     ### 3. The "Duplicate Finder" (Sets/Dictionaries)
+
+     **The Goal:** Given an array of integers, return `true` if any value appears at least twice, and `false` if every element is distinct.
+
+     * **Why do this?** This teaches you about **Sets**. A Set is a data structure that only stores unique items. It’s significantly faster for "existence checks" than an Array (O(1) vs O(N)).
+     * **Pro Tip:** Try solving this by inserting items into a `Set` one by one. If an item is already there, you've found a duplicate!
+
+     ### 4. The "Bracket Validator" (Stacks)
+
+     **The Goal:** Given a string containing just the characters `(`, `)`, `[`, `]`, `{`, and `}`, determine if the input string is valid (every opener has a closer in the right order).
+
+     * **Why do this?** This is the classic introduction to the **Stack** (Last-In, First-Out).
+     * **The Logic:**
+     1. If you see an opener `(`, **push** it onto the stack.
+     2. If you see a closer `)`, **pop** the top item off the stack.
+     3. If they don't match, or the stack is empty at the end, it’s invalid.
+
+
+
+     ---
+
+     ### 📈 Beginner Data Structure Cheat Sheet
+
+     | Data Structure | Best Used For... | Example in your Pulse Tool |
+     | --- | --- | --- |
+     | **Array** | Ordered lists of items. | Storing the last 10 CPU readings. |
+     | **Set** | Unique items, fast lookups. | Keeping track of unique Process IDs (PIDs). |
+     | **Dictionary** | Key-Value pairs. | Mapping a Process Name to its CPU %: `["Xcode": 15.2]`. |
+     | **Stack** | Undo/Redo or nested logic. | Managing a "Back" button in a CLI menu. |
+
+     ---
+     */
 }
