@@ -10,6 +10,14 @@ import XCTest
 
 final class SlidingWindowTests: XCTestCase {
     
+    // Helper function to compare arrays of Double with accuracy
+    private func XCTAssertEqualArrays(_ result: [Double], _ expected: [Double], accuracy: Double = 0.0001, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(result.count, expected.count, "Array counts don't match", file: file, line: line)
+        for (index, (resultValue, expectedValue)) in zip(result, expected).enumerated() {
+            XCTAssertEqual(resultValue, expectedValue, accuracy: accuracy, "Values don't match at index \(index)", file: file, line: line)
+        }
+    }
+    
     // -------------------------------------------------------------------------
     // MARK: Tests for valid inputs
     
@@ -258,5 +266,154 @@ final class SlidingWindowTests: XCTestCase {
         let result = SlidingWindow.minimumSubArrayLength(withSum: targetSum, forArray: input)
         
         XCTAssertEqual(result, expected)
+    }
+    
+    // -------------------------------------------------------------------------
+    // MARK: Tests for newArrayByMovingAverage - valid inputs
+    
+    func test_newArrayByMovingAverage_withValidArray() {
+        let input: [Int] = [10, 20, 30, 40]
+        let expected: [Double] = [10.0, 15.0, 25.0, 35.0]
+        // Explanation:
+        // - First element: 10.0 (unchanged)
+        // - Second element: (10 + 20) / 2 = 15.0
+        // - Third element: (20 + 30) / 2 = 25.0
+        // - Fourth element: (30 + 40) / 2 = 35.0
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withSingleElement() {
+        let input: [Int] = [5]
+        let expected: [Double] = [5.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withTwoElements() {
+        let input: [Int] = [10, 20]
+        let expected: [Double] = [10.0, 15.0]
+        // First element: 10.0 (unchanged)
+        // Second element: (10 + 20) / 2 = 15.0
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withMultipleElements() {
+        let input: [Int] = [1, 3, 5, 7, 9]
+        let expected: [Double] = [1.0, 2.0, 4.0, 6.0, 8.0]
+        // [1.0, (1+3)/2=2.0, (3+5)/2=4.0, (5+7)/2=6.0, (7+9)/2=8.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withLargeArray() {
+        let input: [Int] = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+        let expected: [Double] = [2.0, 3.0, 5.0, 7.0, 9.0, 11.0, 13.0, 15.0, 17.0, 19.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    // -------------------------------------------------------------------------
+    // MARK: Tests for newArrayByMovingAverage - arrays with negative numbers
+    
+    func test_newArrayByMovingAverage_withNegativeNumbers() {
+        let input: [Int] = [-10, 10, -5]
+        let expected: [Double] = [-10.0, 0.0, 2.5]
+        // [-10.0, (-10+10)/2=0.0, (10+(-5))/2=2.5]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withAllNegativeNumbers() {
+        let input: [Int] = [-5, -10, -15, -20]
+        let expected: [Double] = [-5.0, -7.5, -12.5, -17.5]
+        // [-5.0, (-5+(-10))/2=-7.5, (-10+(-15))/2=-12.5, (-15+(-20))/2=-17.5]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withMixedPositiveAndNegative() {
+        let input: [Int] = [10, -5, 8, -2, 15]
+        let expected: [Double] = [10.0, 2.5, 1.5, 3.0, 6.5]
+        // [10.0, (10+(-5))/2=2.5, (-5+8)/2=1.5, (8+(-2))/2=3.0, (-2+15)/2=6.5]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    // -------------------------------------------------------------------------
+    // MARK: Tests for newArrayByMovingAverage - edge cases
+    
+    func test_newArrayByMovingAverage_withEmptyArray() {
+        let input: [Int] = []
+        let expected: [Double] = []
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_newArrayByMovingAverage_withZeroValues() {
+        let input: [Int] = [0, 0, 0]
+        let expected: [Double] = [0.0, 0.0, 0.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withMixedZerosAndNonZeros() {
+        let input: [Int] = [0, 10, 0, -10, 5]
+        let expected: [Double] = [0.0, 5.0, 5.0, -5.0, -2.5]
+        // [0.0, (0+10)/2=5.0, (10+0)/2=5.0, (0+(-10))/2=-5.0, (-10+5)/2=-2.5]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withLargeNumbers() {
+        let input: [Int] = [1000, 2000, 3000]
+        let expected: [Double] = [1000.0, 1500.0, 2500.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withOddNumbers() {
+        let input: [Int] = [1, 3, 5]
+        let expected: [Double] = [1.0, 2.0, 4.0]
+        // [1.0, (1+3)/2=2.0, (3+5)/2=4.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
+    }
+    
+    func test_newArrayByMovingAverage_withEvenNumbers() {
+        let input: [Int] = [2, 4, 6, 8]
+        let expected: [Double] = [2.0, 3.0, 5.0, 7.0]
+        // [2.0, (2+4)/2=3.0, (4+6)/2=5.0, (6+8)/2=7.0]
+        
+        let result = SlidingWindow.newArrayByMovingAverage(from: input)
+        
+        XCTAssertEqualArrays(result, expected, accuracy: 0.0001)
     }
 }
