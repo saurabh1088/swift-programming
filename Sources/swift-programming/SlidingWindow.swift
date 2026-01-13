@@ -219,16 +219,102 @@ struct SlidingWindow {
         return minLength == Int.max ? nil : minLength
     }
     
-    /**
-     1. The "Moving Average" (Arrays)
-     The Goal: Given an array of numbers, return a new array where each element is the average of the current number and the one before it.
-
-     Why do this? In your System Pulse tool, raw CPU data is "spiky." Engineers use moving averages to "smooth" the data for a better UI.
-
-     Input: [10, 20, 30, 40]
-
-     Output: [10.0, 15.0, 25.0, 35.0] (Note: The first element stays the same or averages with 0).
-     */
+    /// Creates a new array by computing the moving average of consecutive elements.
+    ///
+    /// This method calculates a moving average where each element (except the first) is the average
+    /// of the current element and the previous element. The first element remains unchanged.
+    /// This technique is commonly used to smooth out "spiky" data, such as raw CPU readings in
+    /// system monitoring tools, to provide a better user experience in UI visualizations.
+    ///
+    /// The moving average helps reduce noise in time-series data by averaging adjacent values,
+    /// making trends more visible and patterns easier to identify.
+    ///
+    /// - Parameter array: The input array of integers to process.
+    /// - Returns: A new array of `Double` values where each element (except the first) is the
+    ///            average of the current and previous element. Returns an empty array if the input
+    ///            array is empty.
+    ///
+    /// ## Usage Example
+    ///
+    /// ```swift
+    /// let input = [10, 20, 30, 40]
+    /// let smoothed = SlidingWindow.newArrayByMovingAverage(from: input)
+    /// // Result: [10.0, 15.0, 25.0, 35.0]
+    /// // Explanation:
+    /// // - First element: 10.0 (unchanged)
+    /// // - Second element: (10 + 20) / 2 = 15.0
+    /// // - Third element: (20 + 30) / 2 = 25.0
+    /// // - Fourth element: (30 + 40) / 2 = 35.0
+    /// ```
+    ///
+    /// ## Real-World Application
+    ///
+    /// In system monitoring tools like System Pulse, raw CPU data can be "spiky" with sudden
+    /// jumps and drops. Engineers use moving averages to "smooth" this data, making it easier
+    /// to visualize trends and identify patterns in the UI without the visual noise of rapid
+    /// fluctuations.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Validation`
+    ///
+    /// `Correctness`
+    ///
+    /// `Core Logic`
+    /// - The implementation correctly calculates moving averages for consecutive elements.
+    /// - First element is preserved as-is (converted to Double).
+    /// - Each subsequent element is the average of the current and previous element.
+    /// - Properly handles type conversion from Int to Double for accurate floating-point arithmetic.
+    ///
+    /// `Edge Cases`
+    /// - Empty Array: newArrayByMovingAverage(from: []) returns [] (correct, no elements to process).
+    /// - Single Element: newArrayByMovingAverage(from: [5]) returns [5.0] (correct, only first element).
+    /// - Two Elements: newArrayByMovingAverage(from: [10, 20]) returns [10.0, 15.0] (correct).
+    /// - Negative Numbers: newArrayByMovingAverage(from: [-10, 10, -5]) returns [-10.0, 0.0, 2.5] (correct).
+    /// - Zero Values: newArrayByMovingAverage(from: [0, 0, 0]) returns [0.0, 0.0, 0.0] (correct).
+    /// - Large Numbers: Correctly handles large integer values when converting to Double.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Efficiency`
+    ///
+    /// `Time Complexity`
+    /// - Single pass through the array: O(n) where n is the array length.
+    /// - Each element is accessed once (except first element which is accessed once).
+    /// - Total: O(n) which is optimal for this problem, as every element must be processed.
+    ///
+    /// `Space Complexity`
+    /// - O(n) as a new array of the same size is created to store the results.
+    /// - Additional constant space for loop variables and temporary calculations.
+    /// - Space complexity cannot be improved as we need to return a new array.
+    ///
+    /// `Algorithm Efficiency`
+    /// - The implementation processes elements sequentially in a single pass.
+    /// - No redundant calculations or unnecessary iterations.
+    /// - Efficient type conversion and arithmetic operations.
+    /// - Optimal for the problem requirements.
+    ///
+    /// ------------------------------------------------------------------------
+    /// `Potential Issues`
+    ///
+    /// `Performance`
+    /// - The implementation is optimal with O(n) time complexity.
+    /// - No unnecessary iterations or redundant calculations.
+    /// - Array appending is efficient in Swift (amortized O(1) per append).
+    ///
+    /// `Precision`
+    /// - Uses Double for floating-point arithmetic, providing good precision for most use cases.
+    /// - For extremely large integers, precision loss may occur when converting to Double.
+    /// - Consider using Decimal for financial or high-precision applications if needed.
+    ///
+    /// `Integer Overflow`
+    /// - When adding two integers before converting to Double, integer overflow could occur for
+    ///   very large values near Int.max.
+    /// - Consider converting to Double before addition if dealing with very large numbers:
+    ///   `Double(array[index - 1]) + Double(array[index])`.
+    ///
+    /// `First Element Handling`
+    /// - The first element is kept unchanged, which is a design choice.
+    /// - Alternative implementations might average the first element with 0 or handle it differently.
+    /// - Current behavior is consistent and predictable.
     static func newArrayByMovingAverage(from array: [Int]) -> [Double] {
         guard !array.isEmpty else { return [] }
         var finalArray = [Double]()
