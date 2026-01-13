@@ -229,16 +229,16 @@ struct SlidingWindow {
 
      Output: [10.0, 15.0, 25.0, 35.0] (Note: The first element stays the same or averages with 0).
      */
-    static func movingAverage() {
-        let array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        var finalArray = [Int]()
-        finalArray.append(array[0])
+    static func newArrayByMovingAverage(from array: [Int]) -> [Double] {
+        guard !array.isEmpty else { return [] }
+        var finalArray = [Double]()
+        finalArray.append(Double(array[0]))
         for index in 1..<array.count {
-            let sum = array[index - 1] + array[index]
-            let average = sum / 2
+            let sum = Double(array[index - 1] + array[index])
+            let average = sum / 2.0
             finalArray.append(average)
         }
-        print(finalArray)
+        return finalArray
     }
     
     // TODO: Future TODOs
