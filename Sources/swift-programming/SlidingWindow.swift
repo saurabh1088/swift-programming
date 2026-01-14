@@ -328,19 +328,18 @@ struct SlidingWindow {
     }
     
     static func newArrayByMovingAverage(from array: [Int], size: Int) -> [Double] {
-        guard !array.isEmpty else { return [] }
+        guard size > 0, !array.isEmpty else { return [] }
         var finalArray = [Double]()
+        var sum = 0
         for index in 0..<array.count {
-            var sum: Int = 0
-            for innerIndex in 0..<size {
-                if index - innerIndex < 0 {
-                    sum = sum + 0
-                } else {
-                    sum = sum + array[index - innerIndex]
-                }
+            sum = sum + array[index]
+            
+            if index >= size {
+                sum = sum - array[index - size]
             }
-            var average = Double(sum) / Double(size)
-            finalArray.append(average)
+            
+            var divisor = min(index + 1, size)
+            finalArray.append(Double(sum) / Double(divisor))
         }
         return finalArray
     }
