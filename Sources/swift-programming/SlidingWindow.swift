@@ -24,6 +24,7 @@ import Foundation
 ///
 /// - `maximumSubArraySum(for:of:)` - Finds the maximum sum of a subarray with a fixed window size.
 /// - `minimumSubArrayLength(withSum:forArray:)` - Finds the minimum length subarray with sum >= target.
+/// - `newArrayByMovingAverage(from:size:)` - Creates a new array by computing moving averages with a specified window size.
 ///
 /// ## Usage Example
 ///
@@ -219,32 +220,36 @@ struct SlidingWindow {
         return minLength == Int.max ? nil : minLength
     }
     
-    /// Creates a new array by computing the moving average of consecutive elements.
+    /// Creates a new array by computing the moving average with a specified window size.
     ///
-    /// This method calculates a moving average where each element (except the first) is the average
-    /// of the current element and the previous element. The first element remains unchanged.
-    /// This technique is commonly used to smooth out "spiky" data, such as raw CPU readings in
-    /// system monitoring tools, to provide a better user experience in UI visualizations.
+    /// This method calculates a moving average where each element is the average of the current
+    /// element and the previous `size - 1` elements (or all available elements if fewer than `size`
+    /// elements have been processed). This technique is commonly used to smooth out "spiky" data,
+    /// such as raw CPU readings in system monitoring tools, to provide a better user experience in
+    /// UI visualizations.
     ///
-    /// The moving average helps reduce noise in time-series data by averaging adjacent values,
+    /// The moving average helps reduce noise in time-series data by averaging values over a window,
     /// making trends more visible and patterns easier to identify.
     ///
-    /// - Parameter array: The input array of integers to process.
-    /// - Returns: A new array of `Double` values where each element (except the first) is the
-    ///            average of the current and previous element. Returns an empty array if the input
-    ///            array is empty.
+    /// - Parameters:
+    ///   - array: The input array of integers to process.
+    ///   - size: The window size for the moving average. Must be greater than 0.
+    /// - Returns: A new array of `Double` values where each element is the average of the current
+    ///            element and the previous `size - 1` elements (or all available elements if fewer
+    ///            than `size` elements have been processed). Returns an empty array if the input
+    ///            array is empty or size is 0 or negative.
     ///
     /// ## Usage Example
     ///
     /// ```swift
     /// let input = [10, 20, 30, 40]
-    /// let smoothed = SlidingWindow.newArrayByMovingAverage(from: input)
+    /// let smoothed = SlidingWindow.newArrayByMovingAverage(from: input, size: 2)
     /// // Result: [10.0, 15.0, 25.0, 35.0]
     /// // Explanation:
-    /// // - First element: 10.0 (unchanged)
-    /// // - Second element: (10 + 20) / 2 = 15.0
-    /// // - Third element: (20 + 30) / 2 = 25.0
-    /// // - Fourth element: (30 + 40) / 2 = 35.0
+    /// // - First element: average of [10] = 10.0 / 1 = 10.0
+    /// // - Second element: average of [10, 20] = 30.0 / 2 = 15.0
+    /// // - Third element: average of [20, 30] = 50.0 / 2 = 25.0
+    /// // - Fourth element: average of [30, 40] = 70.0 / 2 = 35.0
     /// ```
     ///
     /// ## Real-World Application
@@ -260,35 +265,36 @@ struct SlidingWindow {
     /// `Correctness`
     ///
     /// `Core Logic`
-    /// - The implementation correctly calculates moving averages for consecutive elements.
-    /// - First element is preserved as-is (converted to Double).
-    /// - Each subsequent element is the average of the current and previous element.
+    /// - The implementation correctly calculates moving averages using a sliding window of specified size.
+    /// - For each position, calculates the average of the current element and previous `size - 1` elements.
+    /// - When fewer than `size` elements are available, averages all available elements.
     /// - Properly handles type conversion from Int to Double for accurate floating-point arithmetic.
     ///
     /// `Edge Cases`
-    /// - Empty Array: newArrayByMovingAverage(from: []) returns [] (correct, no elements to process).
-    /// - Single Element: newArrayByMovingAverage(from: [5]) returns [5.0] (correct, only first element).
-    /// - Two Elements: newArrayByMovingAverage(from: [10, 20]) returns [10.0, 15.0] (correct).
-    /// - Negative Numbers: newArrayByMovingAverage(from: [-10, 10, -5]) returns [-10.0, 0.0, 2.5] (correct).
-    /// - Zero Values: newArrayByMovingAverage(from: [0, 0, 0]) returns [0.0, 0.0, 0.0] (correct).
+    /// - Empty Array: newArrayByMovingAverage(from: [], size: 2) returns [] (correct, no elements to process).
+    /// - Single Element: newArrayByMovingAverage(from: [5], size: 2) returns [5.0] (correct, only one element).
+    /// - Two Elements: newArrayByMovingAverage(from: [10, 20], size: 2) returns [10.0, 15.0] (correct).
+    /// - Negative Numbers: newArrayByMovingAverage(from: [-10, 10, -5], size: 2) correctly handles negatives.
+    /// - Zero Values: newArrayByMovingAverage(from: [0, 0, 0], size: 2) returns [0.0, 0.0, 0.0] (correct).
     /// - Large Numbers: Correctly handles large integer values when converting to Double.
+    /// - Invalid Size: newArrayByMovingAverage(from: [1, 2, 3], size: 0) returns [] (correct).
     ///
     /// ------------------------------------------------------------------------
     /// `Efficiency`
     ///
     /// `Time Complexity`
     /// - Single pass through the array: O(n) where n is the array length.
-    /// - Each element is accessed once (except first element which is accessed once).
+    /// - Each element is accessed once and added/removed from the window sum once.
     /// - Total: O(n) which is optimal for this problem, as every element must be processed.
     ///
     /// `Space Complexity`
     /// - O(n) as a new array of the same size is created to store the results.
-    /// - Additional constant space for loop variables and temporary calculations.
+    /// - Additional constant space for loop variables and temporary calculations (sum, index).
     /// - Space complexity cannot be improved as we need to return a new array.
     ///
     /// `Algorithm Efficiency`
     /// - The implementation processes elements sequentially in a single pass.
-    /// - No redundant calculations or unnecessary iterations.
+    /// - Uses sliding window technique to efficiently update the sum without recalculating.
     /// - Efficient type conversion and arithmetic operations.
     /// - Optimal for the problem requirements.
     ///
@@ -306,27 +312,9 @@ struct SlidingWindow {
     /// - Consider using Decimal for financial or high-precision applications if needed.
     ///
     /// `Integer Overflow`
-    /// - When adding two integers before converting to Double, integer overflow could occur for
+    /// - When adding integers before converting to Double, integer overflow could occur for
     ///   very large values near Int.max.
-    /// - Consider converting to Double before addition if dealing with very large numbers:
-    ///   `Double(array[index - 1]) + Double(array[index])`.
-    ///
-    /// `First Element Handling`
-    /// - The first element is kept unchanged, which is a design choice.
-    /// - Alternative implementations might average the first element with 0 or handle it differently.
-    /// - Current behavior is consistent and predictable.
-    static func newArrayByMovingAverage(from array: [Int]) -> [Double] {
-        guard !array.isEmpty else { return [] }
-        var finalArray = [Double]()
-        finalArray.append(Double(array[0]))
-        for index in 1..<array.count {
-            let sum = Double(array[index - 1] + array[index])
-            let average = sum / 2.0
-            finalArray.append(average)
-        }
-        return finalArray
-    }
-    
+    /// - Consider converting to Double before addition if dealing with very large numbers.
     static func newArrayByMovingAverage(from array: [Int], size: Int) -> [Double] {
         guard size > 0, !array.isEmpty else { return [] }
         var finalArray = [Double]()
