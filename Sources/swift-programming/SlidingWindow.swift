@@ -326,7 +326,7 @@ struct SlidingWindow {
                 sum = sum - array[index - size]
             }
             
-            var divisor = min(index + 1, size)
+            let divisor = min(index + 1, size)
             finalArray.append(Double(sum) / Double(divisor))
         }
         return finalArray
