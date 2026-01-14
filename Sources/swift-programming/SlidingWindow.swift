@@ -330,7 +330,6 @@ struct SlidingWindow {
     static func newArrayByMovingAverage(from array: [Int], size: Int) -> [Double] {
         guard !array.isEmpty else { return [] }
         var finalArray = [Double]()
-        finalArray.append(Double(array[0]))
         for index in 0..<array.count {
             var sum: Int = 0
             for innerIndex in 0..<size {
